@@ -34,7 +34,7 @@
         groups: nodes
         ansible_ssh_user: ubuntu
         ansible_host: "{{ trfrm.outputs.servers.value.serverip }}"
-        ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+        ansible_ssh_private_key_file: ~/.ssh/openstack_4sem_key
         ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
 
 - name: Wait for instance creating
