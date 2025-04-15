@@ -2,6 +2,7 @@
   hosts: localhost
   connection: local
   vars:
+  # Путь до террафрма
     terraform_rc_path: .terraformrc
     terraform_path: ./tf
   tasks:
@@ -9,7 +10,7 @@
       copy:
         src: "{{ terraform_rc_path }}"
         dest: ~/.terraformrc
-
+  # Запуск терраформа
     - name: Run terraform
       environment:
         TF_VAR_user_name: "{{ lookup('env', 'TF_VAR_user_name') }}"
@@ -19,7 +20,7 @@
         force_init: yes
         state: present
       register: trfrm
-
+  # Возвращаем IP адрес созданной машины
     - name: Export server IP up
       lineinfile:
         path: ~/myenv
@@ -27,7 +28,7 @@
         line: "DEV_SERVER_IP={{ trfrm.outputs.servers.value.serverip }}"
         mode: '0644'
         create: yes
-
+# Добавляем хост в ansible
     - name: Add instance host (Ansible term)
       add_host:
         name: mikhail-server
