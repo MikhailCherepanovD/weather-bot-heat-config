@@ -1,3 +1,4 @@
+# загрузка провайдера
 terraform {
   required_version = ">= 0.14.0"
   required_providers {
@@ -6,9 +7,9 @@ terraform {
       version = "~> 1.54.1"
     }
   }
-}
+} 
 
-
+# Настраиваем подключение к опенстек, подтыгиваем значения из jenkins переменных окружения
 # use environment variables
 # https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
 provider "openstack" {
@@ -27,7 +28,7 @@ provider "openstack" {
 resource "openstack_networking_secgroup_v2" "sg" {
   name = "mikhail-group-trfm"
 }
-
+# Подключаемся по ssh
 # https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/networking_secgroup_rule_v2
 resource "openstack_networking_secgroup_rule_v2" "sg_ssh_rule" {
   direction = "ingress"
@@ -38,7 +39,7 @@ resource "openstack_networking_secgroup_rule_v2" "sg_ssh_rule" {
   remote_ip_prefix = "0.0.0.0/0"
   security_group_id = openstack_networking_secgroup_v2.sg.id
 }
-
+# Создаем виртуалку
 # https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/compute_instance_v2
 resource "openstack_compute_instance_v2" "mikhail_server" {
   name = "mikhail-server-trfm"
