@@ -5,4 +5,4 @@ users:
     shell: /bin/bash
     sudo: 'ALL=(ALL) NOPASSWD:ALL'
     ssh_authorized_keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBzi9bHamNnVRNvulDEdj37XJVSRq0aejS6oVwcDqXi user@localhost.localdomain
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFvfVEImYV6PSr2hZtnvcxK9upbqh3EdR8NWgp/MEyw9 mikhail@mikhail-VivoBook-ASUSLaptop-X509JA-X509JA
