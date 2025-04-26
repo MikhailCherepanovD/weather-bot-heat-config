@@ -33,7 +33,7 @@ resource "yandex_compute_disk" "boot-disk-1" {
   type     = "network-hdd"
   zone     = "ru-central1-a"
   size     = "20"
-  image_id = "fd833v6c5tb0udvk4jo6" # ubuntu 22.04 LTS v20240325
+  image_id = "fd80bm0rh4rkepi5ksdi" # ubuntu 22.04 LTS v20240325
 }
 
 resource "yandex_compute_instance" "vm-1" {
@@ -77,7 +77,7 @@ resource "yandex_vpc_security_group" "group1" {
 resource "yandex_vpc_security_group_rule" "ssh-rule" {
   security_group_binding = yandex_vpc_security_group.group1.id
   direction              = "ingress"
-  description            = "mhq ssh"
+  description            = "ssh"
   v4_cidr_blocks         = ["0.0.0.0/32"]
   port                   = 22
   protocol               = "TCP"
