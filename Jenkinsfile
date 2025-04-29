@@ -23,7 +23,7 @@ pipeline {
             parallel {
                 stage('Build Bot') {
                     steps {
-                        build(job: 'cherepanov-taskbot-build')
+                        build(job: 'cherepanov-taskbot-yandex')
                     }
                 }
                 stage('Prepare infrastructure for Bot') {
