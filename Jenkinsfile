@@ -23,12 +23,12 @@ pipeline {
             parallel {
                 stage('Build Bot') {
                     steps {
-                        build(job: 'cherepanov-taskbot-yandex')
+                        build(job: 'cherepanov-taskbot-build')
                     }
                 }
                 stage('Prepare infrastructure for Bot') {
                     steps {
-                        build(job: 'cherepanov-taskbot-ansible')
+                        build(job: 'cherepanov-taskbot-yandex')
                         loadVarsFromFile('/home/jenkins/myenv')
                     }
                 }
