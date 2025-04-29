@@ -19,15 +19,19 @@ pipeline {
     agent { label '2025-cherepanov' }
 
     stages {
-       stage('Build Bot') {
-            steps {
-                build(job: 'cherepanov-taskbot-build')
-            }
-        }
-        stage('Prepare infrastructure for Bot') {
-            steps {
-                build(job: 'cherepanov-taskbot-yandex')
-                loadVarsFromFile(...)
+        stage('Prepare Bot for Deploy') {
+            parallel {
+                stage('Build Bot') {
+                    steps {
+                        build(job: 'cherepanov-taskbot-build')
+                    }
+                }
+                stage('Prepare infrastructure for Bot') {
+                    steps {
+                        build(job: 'cherepanov-taskbot-yandex')
+                        loadVarsFromFile('/home/jenkins/myenv')
+                    }
+                }
             }
         }
         stage('Deploy TaskBot') {    
