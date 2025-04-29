@@ -16,7 +16,7 @@ private void loadVarsFromFile(String path) {
 }
 
 pipeline {
-    agent { label 'Cherepanov0103' }
+    agent { label '2025-cherepanov' }
 
     stages {
         stage('Prepare Bot for Deploy') {
