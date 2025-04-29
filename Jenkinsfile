@@ -1,25 +1,32 @@
 private void loadVarsFromFile(String path) {
+    // Читаем содержимое файла в одну строку
     def file = readFile(path)
-        .replaceAll("(?m)^\\s*\\r?\\n", "")  // skip empty line
-        .replaceAll("(?m)^#[^\\n]*\\r?\\n", "")  // skip commented lines
+        // Удаляем пустые строки (в том числе строки с пробелами)
+        .replaceAll("(?m)^\\s*\\r?\\n", "")  
+        // Удаляем строки-комментарии (начинаются с символа #)
+        .replaceAll("(?m)^#[^\\n]*\\r?\\n", "")  
+
+    // Разбиваем оставшийся текст на строки по символу новой строки
     file.split('\n').each { envLine ->
+        // Разделяем строку на ключ и значение по знаку равенства
         def (key, value) = envLine.tokenize('=')
+        // Удаляем кавычки по краям значения и сохраняем в переменные окружения
         env."${key}" = "${value.trim().replaceAll('^\"|\"$', '')}"
     }
 }
 
 pipeline {
-    agent { label '2025-kondraev' }
+    agent { label 'Cherepanov0103' }
 
     stages {
-        stage('Prepare TaskBot for Deploy') {
+        stage('Prepare Bot for Deploy') {
             parallel {
-                stage('Build TaskBot') {
+                stage('Build Bot') {
                     steps {
                         build(job: 'cherepanov-taskbot-build')
                     }
                 }
-                stage('Prepare infrastructure for TaskBot') {
+                stage('Prepare infrastructure for Bot') {
                     steps {
                         build(job: 'cherepanov-taskbot-ansible')
                         loadVarsFromFile('/home/jenkins/myenv')
