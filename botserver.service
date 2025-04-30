@@ -6,7 +6,7 @@ SuccessExitStatus=143
 User=ubuntu
 WorkingDirectory=/home/ubuntu
 Type=simple
-ExecStart=/home/ubuntu/.sdkman/candidates/java/current/bin/java -jar /home/ubuntu/bot.jar
+ExecStart=java -jar /home/ubuntu/bot.jar
 # optional items below
 ExecStop=/bin/kill -15 $MAINPID
 
