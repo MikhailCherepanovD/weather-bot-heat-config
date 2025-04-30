@@ -29,13 +29,14 @@ pipeline {
                 stage('Prepare infrastructure for Bot') {
                     steps {
                         build(job: 'cherepanov-taskbot-yandex')
-                        loadVarsFromFile('/home/jenkins/myenv')
+                      
                     }
                 }
             }
         }
         stage('Deploy TaskBot') {    
             steps {
+                loadVarsFromFile('/home/jenkins/myenv')
                 build(job: 'cherepanov-taskbot-deploy', parameters: [string(name: 'SERVER_ADDRESS', value: env.DEV_SERVER_IP)])
             }
         }
