@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Deploy TaskBot') {    
             steps {
-                loadVarsFromFile('/home/jenkins/myenv')
+                loadVarsFromFile('/home/ubuntu/myenv')
                 build(job: 'cherepanov-taskbot-deploy', parameters: [string(name: 'SERVER_ADDRESS', value: env.DEV_SERVER_IP)])
             }
         }
